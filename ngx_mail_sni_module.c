@@ -17,9 +17,15 @@
  * STARTTLS too (the SNI is in the ClientHello sent after the STARTTLS command),
  * which L4 SNI routing (stream ssl_preread) cannot do.
  *
- * Technique reference: R. Matsumoto et al., "Large-scale Certificate
- * Management on Highly-integrated Multi-tenant Web Servers", IPSJ 2017
- * (dynamic certificate loading at the TLS handshake via SSL_CTX_set_cert_cb).
+ * Technique (dynamic certificate loading at the TLS handshake via
+ * SSL_CTX_set_cert_cb) is taken, with gratitude, from:
+ *   R. Matsumoto, Y. Miyake, K. Rikitake, K. Kuribayashi,
+ *   "Large-scale Certificate Management on Highly-integrated Multi-tenant
+ *   Web Servers" (高集積マルチテナント Web サーバの大規模証明書管理),
+ *   IPSJ SIG Technical Report, 2017.
+ *   https://rand.pepabo.com/papers/iot37-proceeding-matsumotory.pdf
+ *   (originally implemented for HTTP in ngx_mruby:
+ *    https://github.com/matsumotory/ngx_mruby )
  *
  * Build: nginx ./configure --with-compat --with-mail --with-mail_ssl_module \
  *               --add-dynamic-module=/path/to/this/dir && make modules

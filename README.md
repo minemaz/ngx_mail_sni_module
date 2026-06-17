@@ -47,9 +47,8 @@ STARTTLS (which L4 SNI routing such as `stream` `ssl_preread` cannot, since the
 connection starts in plaintext).
 
 The technique — dynamic certificate loading at the TLS handshake via
-`SSL_CTX_set_cert_cb()` — follows R. Matsumoto et al., *"Large-scale Certificate
-Management on Highly-integrated Multi-tenant Web Servers"*, IPSJ SIG Technical
-Report, 2017.
+`SSL_CTX_set_cert_cb()` — is taken from the work cited under
+[Acknowledgments](#acknowledgments) below.
 
 ## Build
 
@@ -128,6 +127,25 @@ does need a reload, as usual.)
   used in a path, to prevent path traversal.
 - Verified on nginx 1.30.x with OpenSSL 3.x for IMAP/POP3/SMTP on
   143/993/110/995/587/465 (STARTTLS and implicit TLS).
+
+## Acknowledgments
+
+This module is a direct application of the idea presented in the following paper,
+which introduced **dynamic server-certificate selection at the TLS handshake via
+OpenSSL's `SSL_CTX_set_cert_cb()`** (implemented there for HTTP in
+[`ngx_mruby`](https://github.com/matsumotory/ngx_mruby)). This module brings the
+same idea to the nginx **mail** module in plain C:
+
+> 松本 亮介, 三宅 悠介, 力武 健次, 栗林 健太郎,
+> 「高集積マルチテナント Web サーバの大規模証明書管理」
+> (Ryosuke Matsumoto, Yusuke Miyake, Kenji Rikitake, Kentaro Kuribayashi,
+> *"Large-scale Certificate Management on Highly-integrated Multi-tenant Web
+> Servers"*), 情報処理学会研究報告 (IPSJ SIG Technical Report), 2017.
+>
+> Paper: https://rand.pepabo.com/papers/iot37-proceeding-matsumotory.pdf
+
+With gratitude to the authors for the technique. Any bugs here are mine, not
+theirs.
 
 ## License
 
