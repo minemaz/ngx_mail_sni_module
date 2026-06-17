@@ -1,0 +1,13 @@
+ngx_addon_name=ngx_mail_sni_module
+
+if test -n "$ngx_module_link"; then
+    ngx_module_type=MAIL
+    ngx_module_name=ngx_mail_sni_module
+    ngx_module_srcs="$ngx_addon_dir/ngx_mail_sni_module.c"
+
+    . auto/module
+else
+    # fallback for very old nginx without the new module interface
+    MAIL_MODULES="$MAIL_MODULES ngx_mail_sni_module"
+    NGX_ADDON_SRCS="$NGX_ADDON_SRCS $ngx_addon_dir/ngx_mail_sni_module.c"
+fi
